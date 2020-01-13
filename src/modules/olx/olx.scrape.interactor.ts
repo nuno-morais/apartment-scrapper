@@ -3,7 +3,7 @@ import { CrawlerService } from './crawler.service';
 import * as moment from 'moment';
 
 @Injectable()
-export class ScrapeInteractor {
+export class OlxScrapeInteractor {
     public constructor(private crawlerService: CrawlerService) { }
     public async call(urls: string[]): Promise<any> {
         return Promise.all(
