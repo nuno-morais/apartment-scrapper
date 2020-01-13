@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { CrawlerService } from './crawler.service';
 import * as moment from 'moment';
+import { CrawlerService } from '../common/crawler/crawler.service';
 
 @Injectable()
 export class OlxScrapeInteractor {
