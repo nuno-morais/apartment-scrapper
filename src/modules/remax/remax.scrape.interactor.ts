@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CrawlerService } from '../common/crawler/crawler.service';
-import { AmazingCrawlerService } from '../common/crawler/amaing-crawler.service';
+import { AmazingCrawlerService } from '../common/crawler/amazing-crawler.service';
 import * as cheerio from 'cheerio';
 
 @Injectable()
@@ -27,15 +26,15 @@ export class RemaxScrapeInteractor {
 
         if (res) {
             const data = this.handleResponse(res);
-            return [...await this.nextPage(data.nextPage, res.page, '.ajax-page-link'), ...data.result];
+            return [...await this.nextPage(data.nextPage, res.page, '.ajax-page-link', res.browser), ...data.result];
         } else {
             return [];
         }
     }
 
-    private async nextPage(shouldGo, page, target) {
+    private async nextPage(shouldGo, page, target, browser) {
         if (shouldGo) {
-            const res = await this.crawlerService.nextPage(page, target)
+            const res = await this.crawlerService.nextPage(page, target, browser)
                 .catch(error => {
                     // tslint:disable-next-line: no-console
                     console.log(`An error as occurred on scrapping page...`, error);
@@ -44,11 +43,12 @@ export class RemaxScrapeInteractor {
 
             if (res) {
                 const data = this.handleResponse(res);
-                return [...await this.nextPage(data.nextPage, res.page, '.ajax-page-link'), ...data.result];
+                return [...await this.nextPage(data.nextPage, res.page, '.ajax-page-link',  res.browser), ...data.result];
             } else {
                 return [];
             }
         } else {
+            this.crawlerService.close(browser);
             return [];
         }
     }
