@@ -1,11 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import * as Crawler from 'crawler';
+import { generate } from 'random-ua';
 
 @Injectable()
 export class CrawlerService {
     private crawler = new Crawler({
-        maxConnections: 1,
-        userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36',
+        maxConnections: 100,
+        rotateUA: true,
+        userAgent: [ generate(), generate(), generate(), generate(), generate(), generate() ],
     });
 
     public async call(url: string): Promise<any> {

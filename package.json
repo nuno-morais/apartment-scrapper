@@ -23,8 +23,11 @@
     "@nestjs/common": "^6.0.0",
     "@nestjs/core": "^6.0.0",
     "@nestjs/platform-express": "^6.0.0",
+    "cheerio": "^1.0.0-rc.3",
     "crawler": "^1.2.1",
     "moment": "^2.24.0",
+    "puppeteer": "^2.0.0",
+    "random-ua": "^0.0.6",
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",
     "rxjs": "^6.3.3"
