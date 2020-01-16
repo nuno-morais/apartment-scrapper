@@ -1,7 +1,7 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
-import { OlxScrapeInteractor } from './modules/olx/olx.scrape.interactor';
-import { ImovirtualScrapeInteractor } from './modules/imovirtual/imovirtual.scrape.interactor';
-import { RemaxScrapeInteractor } from './modules/remax/remax.scrape.interactor';
+import { Controller, Get, UseGuards, Request } from '@nestjs/common';
+import { OlxScrapeInteractor } from './olx/olx.scrape.interactor';
+import { ImovirtualScrapeInteractor } from './imovirtual/imovirtual.scrape.interactor';
+import { RemaxScrapeInteractor } from './remax/remax.scrape.interactor';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller()
@@ -14,7 +14,8 @@ export class AppController {
 
   @UseGuards(AuthGuard('jwt'))
   @Get()
-  async getHello(): Promise<any> {
+  async getHello(@Request() req): Promise<any> {
+    console.log(req.user)
     const result = await this.olxScrapeInteractor.call(
       ['https://www.olx.pt/imoveis/apartamento-casa-a-venda/apartamentos-venda/paranhos/?search%5Bfilter_float_price%3Ato%5D=240000&search%5Bfilter_enum_tipologia%5D%5B0%5D=t3&search%5Bfilter_enum_tipologia%5D%5B1%5D=t4&search%5Bfilter_enum_tipologia%5D%5B2%5D=t5&search%5Bfilter_enum_tipologia%5D%5B3%5D=t6&search%5Bfilter_enum_tipologia%5D%5B4%5D=t7&search%5Bfilter_enum_tipologia%5D%5B5%5D=t8&search%5Bfilter_enum_tipologia%5D%5B6%5D=t9&search%5Bfilter_enum_tipologia%5D%5B7%5D=t10-ou-superior&search%5Bdescription%5D=1&search%5Bprivate_business%5D=private']
     );
