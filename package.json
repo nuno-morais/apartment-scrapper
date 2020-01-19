@@ -9,13 +9,13 @@
     "node": "^12.10.0"
   },
   "scripts": {
+    "heroku-postbuild": "webpack --config webpack.config.js",
     "build": "tsc -p tsconfig.build.json",
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
     "start:dev": "concurrently --handle-input \"wait-on dist/main.js && nodemon\" \"tsc -w -p tsconfig.build.json\" ",
     "start:debug": "nodemon --config nodemon-debug.json",
-    "prestart": "rimraf dist && npm run build",
-    "prestart:prod": "rimraf dist && npm run build",
+    "prestart": "tslint -c tslint.json 'src/**/*.ts' && tsc",
     "start:prod": "node dist/main.js",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest",
@@ -50,7 +50,9 @@
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",
     "rxjs": "^6.3.3",
-    "typeorm": "^0.2.22"
+    "typeorm": "^0.2.22",
+    "webpack": "^4.41.5",
+    "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
     "@nestjs/testing": "^6.0.0",
@@ -66,11 +68,13 @@
     "prettier": "^1.15.3",
     "supertest": "^3.4.1",
     "ts-jest": "24.0.2",
+    "ts-loader": "^6.2.1",
     "ts-node": "8.1.0",
     "tsconfig-paths": "3.8.0",
     "tslint": "5.16.0",
     "typescript": "3.4.3",
-    "wait-on": "^3.2.0"
+    "wait-on": "^3.2.0",
+    "webpack-cli": "^3.3.10"
   },
   "jest": {
     "moduleFileExtensions": [
