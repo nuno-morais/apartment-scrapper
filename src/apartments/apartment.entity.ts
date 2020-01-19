@@ -21,6 +21,9 @@ export class Apartment {
     @Column(type => ApartmentMetadata)
     public ads: ApartmentMetadata[];
 
+    @Column({ default: false })
+    public isHidden: boolean;
+
     @CreateDateColumn()
     public createdAt: Date;
 
