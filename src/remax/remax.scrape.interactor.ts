@@ -17,6 +17,7 @@ export class RemaxScrapeInteractor {
         if (url == null || url === '') {
             return [];
         }
+
         const res = await this.crawlerService.call(url)
             .catch(error => {
                 // tslint:disable-next-line: no-console
@@ -66,7 +67,7 @@ export class RemaxScrapeInteractor {
             result.push({ title, url, price, img });
         });
 
-        const nextPage = $('.disablednav.pag-next').length === 0;
+        const nextPage = false; // $('.disablednav.pag-next').length === 0;
         return { result, nextPage };
     }
 }

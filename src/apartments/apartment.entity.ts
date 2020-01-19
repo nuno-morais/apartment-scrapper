@@ -1,0 +1,32 @@
+import { Column, Entity, ObjectID, CreateDateColumn, UpdateDateColumn, ObjectIdColumn } from 'typeorm';
+import { ApartmentMetadata } from './apartment-metada';
+
+@Entity()
+export class Apartment {
+    // tslint:disable-next-line: variable-name
+    public _id: ObjectID;
+
+    @ObjectIdColumn()
+    public id: ObjectID;
+
+    @Column()
+    public image: string;
+
+    @Column()
+    public title: string;
+
+    @Column()
+    public price: string;
+
+    @Column(type => ApartmentMetadata)
+    public ads: ApartmentMetadata[];
+
+    @CreateDateColumn()
+    public createdAt: Date;
+
+    @UpdateDateColumn()
+    public updatedAt: Date;
+
+    @Column()
+    public userId: string;
+}

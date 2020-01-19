@@ -17,5 +17,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         GetLinkInteractor,
         DeleteLinkInteractor,
         CreateLinkInteractor],
+    exports: [GetLinksInteractor],
 })
 export class LinksModule { }
