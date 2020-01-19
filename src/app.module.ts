@@ -16,6 +16,7 @@ const options = {
   synchronize: process.env.TYPEORM_SYNCHRONIZE as unknown as boolean,
   username: process.env.TYPEORM_USERNAME,
   password: process.env.TYPEORM_PASSWORD,
+  useUnifiedTopology: true,
 };
 @Module({
   imports: [
