@@ -4,6 +4,10 @@
   "description": "Scan the list of apartments to rent or buy",
   "author": "",
   "license": "MIT",
+  "engines": {
+    "yarn": "^1.17.3",
+    "node": "^12.10.0"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "format": "prettier --write \"src/**/*.ts\"",
