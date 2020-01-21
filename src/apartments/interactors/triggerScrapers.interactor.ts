@@ -26,12 +26,10 @@ export class TriggerScrapersInteractor {
     public async call(userId: string): Promise<void> {
         setTimeout(async () => {
             const links = (await this.getLinksInteractor.call(userId))[0];
-            let apartments = [];
             for (const link of links) {
                 const apartmentsScrapped = await this.scrapeLink(link);
-                apartments = [...apartments, ...apartmentsScrapped];
+                this.mergeApartments(apartmentsScrapped, userId);
             }
-            this.mergeApartments(apartments, userId);
         }, 0);
     }
 
@@ -39,23 +37,23 @@ export class TriggerScrapersInteractor {
         if (link.provider === this.REMAX) {
             return await this.remaxScrapeInteractor.call([link.url])
                 .then(result => result.map(r => (new ApartmentMetadata({ ...r, provider: this.REMAX }))))
-                .catch(error => this.handleError(error, this.REMAX));
+                .catch(error => this.handleError(error, link, this.REMAX));
         } else if (link.provider === this.OLX) {
             return await this.olxScrapeInteractor.call([link.url])
                 .then(result => result.map(r => (new ApartmentMetadata({ ...r, provider: this.OLX }))))
-                .catch(error => this.handleError(error, this.OLX));
+                .catch(error => this.handleError(error, link, this.OLX));
         } else if (link.provider === this.IMOVIRTUAL) {
             return await this.imovirtualScrapeInteractor.call([link.url])
                 .then(result => result.map(r => (new ApartmentMetadata({ ...r, provider: this.IMOVIRTUAL }))))
-                .catch(error => this.handleError(error, this.IMOVIRTUAL));
+                .catch(error => this.handleError(error, link, this.IMOVIRTUAL));
         } else {
             return [];
         }
     }
 
-    private handleError(provider: string, error): ApartmentMetadata[] {
+    private handleError(provider: string, link, error): ApartmentMetadata[] {
         // tslint:disable-next-line: no-console
-        console.error(`An error occurred when scrapping '${provider}'. `, error);
+        console.error(`An error occurred when scrapping '${provider}'. `, link, error);
         return [];
     }
 

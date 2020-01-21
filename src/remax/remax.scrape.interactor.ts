@@ -27,7 +27,7 @@ export class RemaxScrapeInteractor {
 
         if (res) {
             const data = this.handleResponse(res);
-            return [...await this.nextPage(data.nextPage, res.page, '.ajax-page-link', res.browser), ...data.result];
+            return [...await this.nextPage(data.nextPage, res.page, '.pagination>li:last-child>a', res.browser), ...data.result];
         } else {
             return [];
         }
@@ -44,7 +44,7 @@ export class RemaxScrapeInteractor {
 
             if (res) {
                 const data = this.handleResponse(res);
-                return [...await this.nextPage(data.nextPage, res.page, '.ajax-page-link',  res.browser), ...data.result];
+                return [...await this.nextPage(data.nextPage, res.page, '.pagination>li:last-child>a', res.browser), ...data.result];
             } else {
                 return [];
             }
@@ -67,7 +67,7 @@ export class RemaxScrapeInteractor {
             result.push({ title, url, price, img });
         });
 
-        const nextPage = false; // $('.disablednav.pag-next').length === 0;
+        const nextPage = $('.disablednav .page-next').length === 0;
         return { result, nextPage };
     }
 }
