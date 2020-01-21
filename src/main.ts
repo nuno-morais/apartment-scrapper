@@ -3,16 +3,16 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import * as morgan from 'morgan';
 import * as cors from 'cors';
-import { ResponseHeadersInterceptor } from './common/interceptors/ResponseHeadersInterceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors();
-  app.use(cors({
+  app.enableCors({
     exposedHeaders: ['X-Total-Count'],
-  }));
+  });
+  // app.use(cors({
+  //   exposedHeaders: ['X-Total-Count'],
+  // }));
   app.use(morgan('combined'));
-  app.useGlobalInterceptors(new ResponseHeadersInterceptor());
   app.useGlobalPipes(new ValidationPipe({
     transform: true,
   }));

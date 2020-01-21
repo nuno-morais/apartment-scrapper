@@ -25,10 +25,11 @@ export class TriggerScrapersInteractor {
 
     public async call(userId: string): Promise<void> {
         setTimeout(async () => {
-            const links = await this.getLinksInteractor.call(userId);
+            const links = (await this.getLinksInteractor.call(userId))[0];
             let apartments = [];
             for (const link of links) {
-                apartments = [...apartments, ... await this.scrapeLink(link)];
+                const apartmentsScrapped = await this.scrapeLink(link);
+                apartments = [...apartments, ...apartmentsScrapped];
             }
             this.mergeApartments(apartments, userId);
         }, 0);
@@ -37,18 +38,29 @@ export class TriggerScrapersInteractor {
     private async scrapeLink(link): Promise<ApartmentMetadata[]> {
         if (link.provider === this.REMAX) {
             return await this.remaxScrapeInteractor.call([link.url])
-                .then(result => result.map(r => (new ApartmentMetadata({ ...r, provider: this.REMAX }))));
+                .then(result => result.map(r => (new ApartmentMetadata({ ...r, provider: this.REMAX }))))
+                .catch(error => this.handleError(error, this.REMAX));
         } else if (link.provider === this.OLX) {
             return await this.olxScrapeInteractor.call([link.url])
-                .then(result => result.map(r => (new ApartmentMetadata({ ...r, provider: this.OLX }))));
+                .then(result => result.map(r => (new ApartmentMetadata({ ...r, provider: this.OLX }))))
+                .catch(error => this.handleError(error, this.OLX));
         } else if (link.provider === this.IMOVIRTUAL) {
             return await this.imovirtualScrapeInteractor.call([link.url])
-                .then(result => result.map(r => (new ApartmentMetadata({ ...r, provider: this.IMOVIRTUAL }))));
+                .then(result => result.map(r => (new ApartmentMetadata({ ...r, provider: this.IMOVIRTUAL }))))
+                .catch(error => this.handleError(error, this.IMOVIRTUAL));
+        } else {
+            return [];
         }
     }
 
+    private handleError(provider: string, error): ApartmentMetadata[] {
+        // tslint:disable-next-line: no-console
+        console.error(`An error occurred when scrapping '${provider}'. `, error);
+        return [];
+    }
+
     private async mergeApartments(metaApartments: ApartmentMetadata[], userId: string): Promise<void> {
-        const storedApartments = await this.getApartmentsInteractor.call(userId);
+        const storedApartments = (await this.getApartmentsInteractor.call(userId))[0];
         for (const apartment of metaApartments) {
             const existApartment = storedApartments.find(q => q.title === apartment.title);
             if (!existApartment) {

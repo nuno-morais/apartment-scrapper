@@ -1,16 +1,24 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Apartment } from '../apartment.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { MongoRepository } from 'typeorm';
+import { QueryOptions } from './../../common/Queries/query-options';
 
 @Injectable()
 export class GetApartmentsInteractor {
     constructor(
         @InjectRepository(Apartment)
-        private readonly apartmentRepository: Repository<Apartment>,
+        private readonly apartmentRepository: MongoRepository<Apartment>,
     ) { }
 
-    public async call(userId: string): Promise<Apartment[]> {
-        return await this.apartmentRepository.find({ userId });
+    public async call(userId: string, isHiddenEnabled: boolean = true, query: QueryOptions = new QueryOptions()): Promise<[Apartment[], number]> {
+        let isHiddenQuery = {};
+        if (!isHiddenEnabled) {
+            isHiddenQuery = { isHidden: { $not: { $eq: true } } };
+        }
+        const conditions = {
+            where: { userId, ...isHiddenQuery }, ...query.toMongoQuery(),
+        };
+        return await this.apartmentRepository.findAndCount(conditions);
     }
 }

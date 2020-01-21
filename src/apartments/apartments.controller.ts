@@ -1,8 +1,9 @@
-import { Controller, Get, UseGuards, Request, Post, Param } from '@nestjs/common';
+import { Controller, Get, UseGuards, Request, Post, Param, Query, Res, HttpStatus } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Apartment } from './apartment.entity';
 import { GetApartmentsInteractor } from './interactors/getApartments.interactor';
 import { HideApartmentInteractor } from './interactors/hideApartment.interactor';
+import { QueryOptions } from '../common/Queries/query-options';
 
 @Controller('apartments')
 export class ApartmentsController {
@@ -13,9 +14,11 @@ export class ApartmentsController {
 
     @UseGuards(AuthGuard('jwt'))
     @Get()
-    async getApartments(@Request() req): Promise<Apartment[]> {
-        return await this.getApartmentsInteractor.call(req.user.userId)
-            .then(result => result.filter(q => q.isHidden == null || q.isHidden === false));
+    async getApartments(@Request() req, @Res() res, @Query() query: QueryOptions): Promise<Apartment[]> {
+        const result = await this.getApartmentsInteractor.call(req.user.userId, false, query);
+        res.set({ 'X-Total-Count': result[1] });
+        res.status(HttpStatus.OK).send(result[0]);
+        return result[0];
     }
 
     @UseGuards(AuthGuard('jwt'))

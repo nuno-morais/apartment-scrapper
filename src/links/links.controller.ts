@@ -1,10 +1,11 @@
-import { Controller, Get, UseGuards, Request, Param, Post, Body, Delete } from '@nestjs/common';
+import { Controller, Get, UseGuards, Request, Param, Post, Body, Delete, Query, Res, HttpStatus } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Link } from './link.entity';
 import { GetLinksInteractor } from './interactors/getLinks.interactor';
 import { GetLinkInteractor } from './interactors/getLink.interactor';
 import { CreateLinkInteractor } from './interactors/createLink.interactor';
 import { DeleteLinkInteractor } from './interactors/deleteLink.interactor';
+import { QueryOptions } from './../common/Queries/query-options';
 
 @Controller('links')
 export class LinksController {
@@ -17,8 +18,11 @@ export class LinksController {
 
     @UseGuards(AuthGuard('jwt'))
     @Get()
-    async getLinks(@Request() req): Promise<Link[]> {
-        return this.getLinksInteractor.call(req.user.userId);
+    async getLinks(@Request() req, @Res() res, @Query() query: QueryOptions): Promise<Link[]> {
+        const result = await this.getLinksInteractor.call(req.user.userId, query);
+        res.set({ 'X-Total-Count': result[1] });
+        res.status(HttpStatus.OK).send(result[0]);
+        return result[0];
     }
 
     @UseGuards(AuthGuard('jwt'))
