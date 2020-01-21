@@ -24,6 +24,9 @@ export class Apartment {
     @Column({ default: false })
     public isHidden: boolean;
 
+    @Column({ default: false })
+    public isFavorite: boolean;
+
     @CreateDateColumn()
     public createdAt: Date;
 

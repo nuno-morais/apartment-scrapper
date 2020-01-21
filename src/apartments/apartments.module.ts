@@ -12,11 +12,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { LinksModule } from '../links/links.module';
 import { ApartmentTriggerController } from './apartment-trigger.controller';
 import { HideApartmentInteractor } from './interactors/hideApartment.interactor';
+import { FavoriteApartmentInteractor } from './interactors/favoriteApartment.interactor';
 
 @Module({
   controllers: [ApartmentsController, ApartmentTriggerController],
   imports: [TypeOrmModule.forFeature([Apartment]), LinksModule, OlxModule, ImovirtualModule, RemaxModule],
   providers: [CreateApartmentInteractor, GetApartmentsInteractor,
-    GetApartmentInteractor, TriggerScrapersInteractor, HideApartmentInteractor]
+    GetApartmentInteractor, TriggerScrapersInteractor, HideApartmentInteractor, FavoriteApartmentInteractor],
 })
 export class ApartmentsModule { }

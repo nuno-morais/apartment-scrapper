@@ -11,6 +11,8 @@ export class CreateApartmentInteractor {
     ) { }
 
     public async call(apartment: Apartment, userId: string): Promise<Apartment> {
+        apartment.isHidden = !!apartment.isHidden;
+        apartment.isFavorite = !!apartment.isFavorite;
         return await this.apartmentRepository.save({ ...apartment, userId });
     }
 }

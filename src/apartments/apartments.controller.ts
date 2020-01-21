@@ -4,12 +4,14 @@ import { Apartment } from './apartment.entity';
 import { GetApartmentsInteractor } from './interactors/getApartments.interactor';
 import { HideApartmentInteractor } from './interactors/hideApartment.interactor';
 import { QueryOptions } from '../common/Queries/query-options';
+import { FavoriteApartmentInteractor } from './interactors/favoriteApartment.interactor';
 
 @Controller('apartments')
 export class ApartmentsController {
     constructor(
         private readonly getApartmentsInteractor: GetApartmentsInteractor,
         private readonly hideApartmentInteractor: HideApartmentInteractor,
+        private readonly favoriteApartmentInteractor: FavoriteApartmentInteractor,
     ) { }
 
     @UseGuards(AuthGuard('jwt'))
@@ -25,5 +27,11 @@ export class ApartmentsController {
     @Post(':id/actions/hide')
     async hideApartments(@Request() req, @Param('id') id): Promise<Apartment> {
         return await this.hideApartmentInteractor.call(id, req.user.userId);
+    }
+
+    @UseGuards(AuthGuard('jwt'))
+    @Post(':id/actions/favorite')
+    async favoriteApartments(@Request() req, @Param('id') id): Promise<Apartment> {
+        return await this.favoriteApartmentInteractor.call(id, req.user.userId);
     }
 }
