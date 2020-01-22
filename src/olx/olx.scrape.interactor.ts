@@ -44,7 +44,8 @@ export class OlxScrapeInteractor {
             const price = $(adsApartment).find('.space.inlblk.rel strong').first().text();
             const timeString = $(adsApartment).find('.lheight16 .breadcrumb span').last().text();
             const time = this.parseDate(timeString.trim().replace(/  /g, ' '));
-            result.push({ title, url, price, img, time });
+            const adsId = $(adsApartment).find('table').first().attr('data-id');
+            result.push({ title, url, price, img, time, adsId });
         });
 
         const nextPage = $('.pageNextPrev').last().attr('href');

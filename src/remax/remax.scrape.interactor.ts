@@ -64,7 +64,8 @@ export class RemaxScrapeInteractor {
             const url = `http://remax.pt/` + $(adsApartment).find('.gallery-title a').first().attr('href');
             const img = $(adsApartment).find('.gallery-share-compare .control-checkbox input').first().attr('data-thumbnail');
             const price = $(adsApartment).find('.proplist_price').first().text();
-            result.push({ title, url, price, img });
+            const adsId = $(adsApartment).attr('id');
+            result.push({ title, url, price, img, adsId });
         });
 
         const nextPage = $('.disablednav .page-next').length === 0;

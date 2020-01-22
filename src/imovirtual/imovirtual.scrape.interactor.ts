@@ -40,7 +40,8 @@ export class ImovirtualScrapeInteractor {
             const url = $(adsApartment).find('.offer-item-header a').first().attr('href');
             const img = $(adsApartment).find('.offer-item-image a span').first().attr('data-src');
             const price = $(adsApartment).find('.offer-item-price').first().text().trim();
-            result.push({ title, url, price, img });
+            const adsId = $(adsApartment).find('.offer-item').first().attr('tracking-id');
+            result.push({ title, url, price, img, adsId });
         });
 
         const nextPage = ($('.pager-next a').last() || { attr: () => null }).attr('href');

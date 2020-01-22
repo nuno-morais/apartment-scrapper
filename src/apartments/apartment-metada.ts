@@ -24,6 +24,9 @@ export class ApartmentMetadata {
     @Column()
     public provider: string;
 
+    @Column({ name: 'ads_id' })
+    public adsId: string;
+
     constructor(data: Partial<ApartmentMetadata> = null) {
         if (data) {
             for (const key in data) {

@@ -60,7 +60,7 @@ export class TriggerScrapersInteractor {
     private async mergeApartments(metaApartments: ApartmentMetadata[], userId: string): Promise<void> {
         const storedApartments = (await this.getApartmentsInteractor.call(userId))[0];
         for (const apartment of metaApartments) {
-            const existApartment = storedApartments.find(q => q.title === apartment.title);
+            const existApartment = storedApartments.find(q => q.ads[0].adsId === apartment.adsId);
             if (!existApartment) {
                 const newApartment = new Apartment();
                 newApartment.ads = [apartment];
