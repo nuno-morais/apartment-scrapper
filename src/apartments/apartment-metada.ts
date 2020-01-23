@@ -24,7 +24,7 @@ export class ApartmentMetadata {
     @Column()
     public provider: string;
 
-    @Column({ name: 'ads_id' })
+    @Column()
     public adsId: string;
 
     constructor(data: Partial<ApartmentMetadata> = null) {
