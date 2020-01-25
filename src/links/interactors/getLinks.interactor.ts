@@ -13,7 +13,7 @@ export class GetLinksInteractor {
 
     public async call(userId: string, query: QueryOptions = new QueryOptions()): Promise<[Link[], number]> {
         const conditions = {
-            where: { userId }, ...query.toMongoQuery(),
+            where: { userId }, ...QueryOptions.fromQueryOptions(query).toMongoQuery(),
         };
         return await this.linkRepository.findAndCount(conditions);
     }

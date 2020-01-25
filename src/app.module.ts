@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { LinksModule } from './links/links.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -24,7 +22,5 @@ const options = {
   imports: [
     TypeOrmModule.forRoot(options),
     AuthModule, LinksModule, ApartmentsModule],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule { }

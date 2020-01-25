@@ -2,16 +2,12 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import * as morgan from 'morgan';
-import * as cors from 'cors';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
     exposedHeaders: ['X-Total-Count'],
   });
-  // app.use(cors({
-  //   exposedHeaders: ['X-Total-Count'],
-  // }));
   app.use(morgan('combined'));
   app.useGlobalPipes(new ValidationPipe({
     transform: true,

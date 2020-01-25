@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  common: &COMMON
+    build:
+      context: .
+    environment:
+      - AUTH_ISSUER=https://nm-sandbox.eu.auth0.com/
+      - AUTH_AUDIENCE=apartments-scraper-tests
+      - AUTH_ALGORITHM=RS256
+      - TYPEORM_CONNECTION=mongodb
+      - TYPEORM_HOST=mongo.local
+      - TYPEORM_DATABASE=apartments-scraper-test
+      - TYPEORM_SYNCHRONIZE=true
+      - TYPEORM_LOGGING=true
+      - TYPEORM_ENTITIES=./**/*.entity{.ts,.js}
+      - TEST_AUTH_CLIENT_ID=eUrhKU4KPlDM21sD7c4j6Q1LPPqazEtc
+      - TEST_AUTH_URL=https://nm-sandbox.eu.auth0.com/oauth/token
+      - TEST_AUTH_CLIENT_SECRET=fl3zIUgAbJfoMI2LSZcFp4I1nyYAaEP87eROPUmt6dFOJVzGy-Qoc1Kf9gL7EOpD
+      - TEST_AUTH_AUDIENCE=apartments-scraper-tests
+    links:
+      - mongodb:mongo.local
+    ports:
+      - 127.0.0.1:3001:3001
+  tests:
+    <<: *COMMON
+    command: bash -c "yarn test && yarn test:e2e"
+  dev:
+    <<: *COMMON
+    command: node dist/main.js
+
+  mongodb:
+    image: mongo:latest
+    environment:
+      - MONGODB_DATABASE="apartments-scraper-test"
+    ports:
+      - 27017:27017
