@@ -40,7 +40,8 @@ export class ImovirtualScrapeInteractor {
             const url = $(adsApartment).find('.offer-item-header a').first().attr('href');
             const img = $(adsApartment).find('.offer-item-image a span').first().attr('data-src');
             const price = $(adsApartment).find('.offer-item-price').first().text().trim();
-            const adsId = $(adsApartment).find('.offer-item').first().attr('tracking-id');
+            const adsId = $(adsApartment).attr('data-tracking-id');
+            console.log(adsId);
             result.push({ title, url, price, img, adsId });
         });
 
