@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ObjectID } from 'mongodb';
 import { MongoRepository } from 'typeorm';
@@ -13,9 +13,12 @@ export class FavoriteApartmentInteractor {
         private readonly getApartmentInteractor: GetApartmentInteractor,
     ) { }
 
-    public async call(id: string, userId: string): Promise<Apartment> {
+    public async call(id: string, userId: string, isFavorite = true): Promise<Apartment> {
         const apartment = await this.getApartmentInteractor.call(id, userId);
-        apartment.isFavorite = true;
+        if (apartment == null) {
+            throw new NotFoundException('Entity not found');
+        }
+        apartment.isFavorite = isFavorite;
         await this.apartmentRepository.findOneAndUpdate(
             { _id: new ObjectID(apartment.id) }, { $set: apartment }, { returnOriginal: false });
         return apartment;

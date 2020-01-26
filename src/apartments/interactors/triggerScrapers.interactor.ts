@@ -3,7 +3,7 @@ import { ImovirtualScrapeInteractor } from '../../imovirtual/imovirtual.scrape.i
 import { GetLinksInteractor } from '../../links/interactors/getLinks.interactor';
 import { OlxScrapeInteractor } from '../../olx/olx.scrape.interactor';
 import { RemaxScrapeInteractor } from '../../remax/remax.scrape.interactor';
-import { ApartmentMetadata } from '../apartment-metada';
+import { ApartmentMetadata } from '../apartment-metada.entity';
 import { Apartment } from '../apartment.entity';
 import { CreateApartmentInteractor } from './createApartment.interactor';
 import { GetApartmentsInteractor } from './getApartments.interactor';

@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, ObjectID, ObjectIdColumn, UpdateDateColumn } from 'typeorm';
-import { ApartmentMetadata } from './apartment-metada';
+import { ApartmentMetadata } from './apartment-metada.entity';
 
 @Entity()
 export class Apartment {

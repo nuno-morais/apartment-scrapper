@@ -17,7 +17,7 @@ export class GetApartmentsInteractor {
             isHiddenQuery = { isHidden: { $not: { $eq: true } } };
         }
         const conditions = {
-            where: { userId, ...isHiddenQuery }, ...query.toMongoQuery(),
+            where: { userId, ...isHiddenQuery }, ...QueryOptions.fromQueryOptions(query).toMongoQuery(),
         };
         return await this.apartmentRepository.findAndCount(conditions);
     }

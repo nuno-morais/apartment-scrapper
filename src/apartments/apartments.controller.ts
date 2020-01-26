@@ -1,4 +1,4 @@
-import { Controller, Get, HttpStatus, Param, Post, Query, Request, Res, UseGuards } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus, Param, Post, Query, Request, Res, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { QueryOptions } from '../common/Queries/query-options';
 import { Apartment } from './apartment.entity';
@@ -23,15 +23,31 @@ export class ApartmentsController {
         return result[0];
     }
 
+    @HttpCode(200)
     @UseGuards(AuthGuard('jwt'))
     @Post(':id/actions/hide')
-    public async hideApartments(@Request() req, @Param('id') id): Promise<Apartment> {
+    public async hideApartment(@Request() req, @Param('id') id): Promise<Apartment> {
         return await this.hideApartmentInteractor.call(id, req.user.userId);
     }
 
+    @HttpCode(200)
     @UseGuards(AuthGuard('jwt'))
     @Post(':id/actions/favorite')
-    public async favoriteApartments(@Request() req, @Param('id') id): Promise<Apartment> {
+    public async favoriteApartment(@Request() req, @Param('id') id): Promise<Apartment> {
         return await this.favoriteApartmentInteractor.call(id, req.user.userId);
+    }
+
+    @HttpCode(200)
+    @UseGuards(AuthGuard('jwt'))
+    @Post(':id/actions/show')
+    public async showApartment(@Request() req, @Param('id') id): Promise<Apartment> {
+        return await this.hideApartmentInteractor.call(id, req.user.userId, false);
+    }
+
+    @HttpCode(200)
+    @UseGuards(AuthGuard('jwt'))
+    @Post(':id/actions/nonfavorite')
+    public async nonFavoriteApartments(@Request() req, @Param('id') id): Promise<Apartment> {
+        return await this.favoriteApartmentInteractor.call(id, req.user.userId, false);
     }
 }
