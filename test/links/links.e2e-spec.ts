@@ -67,6 +67,27 @@ describe('LinksController (e2e)', () => {
                         return result;
                     });
             });
+
+            describe('when a sort filter is applied', () => {
+                test('returns all links sorted correctly', () => {
+                    return request(app.getHttpServer())
+                        .get('/links')
+                        .query({ _sort: 'url', _order: 'DESC', _start: 2, _end: 4 })
+                        .set('Authorization', `${token.token_type} ${token.access_token}`)
+                        .expect(200)
+                        .expect(
+                            parseLinks(
+                                links
+                                    .splice(0, 2)
+                                    .sort((a, b) => b.url.localeCompare(a.url)),
+                            ),
+                        )
+                        .then(result => {
+                            expect(result.body.length).toEqual(2);
+                            return result;
+                        });
+                });
+            });
         });
     });
 

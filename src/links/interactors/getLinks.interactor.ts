@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { MongoRepository } from 'typeorm';
 import { Link } from '../link.entity';
 import { QueryOptions } from './../../common/Queries/query-options';
 
@@ -8,7 +8,7 @@ import { QueryOptions } from './../../common/Queries/query-options';
 export class GetLinksInteractor {
     constructor(
         @InjectRepository(Link)
-        private readonly linkRepository: Repository<Link>,
+        private readonly linkRepository: MongoRepository<Link>,
     ) { }
 
     public async call(userId: string, query: QueryOptions = new QueryOptions()): Promise<[Link[], number]> {
