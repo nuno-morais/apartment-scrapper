@@ -41,7 +41,6 @@ export class ImovirtualScrapeInteractor {
             const img = $(adsApartment).find('.offer-item-image a span').first().attr('data-src');
             const price = $(adsApartment).find('.offer-item-price').first().text().trim();
             const adsId = $(adsApartment).attr('data-tracking-id');
-            console.log(adsId);
             result.push({ title, url, price, img, adsId });
         });
 
