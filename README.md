@@ -2,7 +2,7 @@
 
 [Apartment Scrapper](https://github.com/nuno-morais/apartment-scrapper/) is a service to scan apartments to rent or buy. 
 
-[![Build Status](https://travis-ci.com/nuno-morais/apartment-scrapper.svg?branch=master)](https://travis-ci.com/nuno-morais/apartment-scrapper)
+[![Build Status](https://travis-ci.com/nuno-morais/apartment-scrapper.svg?branch=master)](https://travis-ci.com/nuno-morais/apartment-scrapper) [![Maintainability](https://api.codeclimate.com/v1/badges/565ed53dca0e488e5aab/maintainability)](https://codeclimate.com/github/nuno-morais/apartment-scrapper/maintainability)
 
 ## Installation
 
