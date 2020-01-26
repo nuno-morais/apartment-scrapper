@@ -200,8 +200,8 @@ describe('LinksController (e2e)', () => {
         });
     });
 
-    afterAll(done => {
-        app.close();
+    afterAll(async (done) => {
+        await app.close();
         done();
     });
 });

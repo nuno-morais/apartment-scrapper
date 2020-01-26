@@ -296,4 +296,9 @@ describe('ApartmentsController (e2e)', () => {
             });
         });
     });
+
+    afterAll(async (done) => {
+        await app.close();
+        done();
+    });
 });
