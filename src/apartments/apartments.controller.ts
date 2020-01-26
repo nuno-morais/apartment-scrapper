@@ -1,6 +1,6 @@
 import { Controller, Get, HttpCode, HttpStatus, Param, Post, Query, Request, Res, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { QueryOptions } from '../common/Queries/query-options';
+import { QueryOptions } from '../common/queries/query-options';
 import { Apartment } from './apartment.entity';
 import { FavoriteApartmentInteractor } from './interactors/favoriteApartment.interactor';
 import { GetApartmentsInteractor } from './interactors/getApartments.interactor';

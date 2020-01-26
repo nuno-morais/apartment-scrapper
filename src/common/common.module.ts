@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AmazingCrawlerService } from './crawler/amazing-crawler.service';
-import { CrawlerService } from './crawler/crawler.service';
+import { AmazingCrawlerService } from './crawlers/amazing-crawler.service';
+import { CrawlerService } from './crawlers/crawler.service';
 
 @Module({
     exports: [CrawlerService, AmazingCrawlerService],

@@ -1,60 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import * as cheerio from 'cheerio';
-import { AmazingCrawlerService } from '../common/crawler/amazing-crawler.service';
+import { AmazingCrawlerService } from '../common/crawlers/amazing-crawler.service';
+import { ScraperBrowserBase } from '../common/crawlers/scraper.browser.base';
 
 @Injectable()
-export class RemaxScrapeInteractor {
-    public constructor(private crawlerService: AmazingCrawlerService) { }
-    public async call(urls: string[]): Promise<any> {
-        return Promise.all(
-            urls.map(async (url) => {
-                return await this.fetchData(url);
-            }),
-        ).then(result => result.reduce((acc, val) => acc.concat(val), []));
+export class RemaxScrapeInteractor extends ScraperBrowserBase {
+    public constructor(crawlerService: AmazingCrawlerService) {
+        super(crawlerService);
     }
 
-    private async fetchData(url: string) {
-        if (url == null || url === '') {
-            return [];
-        }
-
-        const res = await this.crawlerService.call(url)
-            .catch(error => {
-                // tslint:disable-next-line: no-console
-                console.log(`An error as occurred on scrapping page...`, error);
-                return null;
-            });
-
-        if (res) {
-            const data = this.handleResponse(res);
-            return [...await this.nextPage(data.nextPage, res.page, '.pagination>li:last-child>a', res.browser), ...data.result];
-        } else {
-            return [];
-        }
+    protected nextPageTarget(): string {
+        return '.pagination>li:last-child>a';
     }
 
-    private async nextPage(shouldGo, page, target, browser) {
-        if (shouldGo) {
-            const res = await this.crawlerService.nextPage(page, target, browser)
-                .catch(error => {
-                    // tslint:disable-next-line: no-console
-                    console.log(`An error as occurred on scrapping page...`, error);
-                    return null;
-                });
-
-            if (res) {
-                const data = this.handleResponse(res);
-                return [...await this.nextPage(data.nextPage, res.page, '.pagination>li:last-child>a', res.browser), ...data.result];
-            } else {
-                return [];
-            }
-        } else {
-            this.crawlerService.close(browser);
-            return [];
-        }
-    }
-
-    private handleResponse(res) {
+    protected handleResponse(res) {
         const $ = cheerio.load(res.content);
         const ads = $('.gallery-item-container');
         const result = [];

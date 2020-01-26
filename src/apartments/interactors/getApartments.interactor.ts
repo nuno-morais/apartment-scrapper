@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MongoRepository } from 'typeorm';
+import { QueryOptions } from '../../common/queries/query-options';
 import { Apartment } from '../apartment.entity';
-import { QueryOptions } from './../../common/Queries/query-options';
 
 @Injectable()
 export class GetApartmentsInteractor {

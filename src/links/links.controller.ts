@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Query, Request, Res, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { QueryOptions } from './../common/Queries/query-options';
+import { QueryOptions } from '../common/queries/query-options';
 import { CreateLinkInteractor } from './interactors/createLink.interactor';
 import { DeleteLinkInteractor } from './interactors/deleteLink.interactor';
 import { GetLinkInteractor } from './interactors/getLink.interactor';

@@ -1,37 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { CrawlerService } from '../common/crawler/crawler.service';
+import { CrawlerService } from '../common/crawlers/crawler.service';
+import { ScraperBase } from '../common/crawlers/scraper.base';
 
 @Injectable()
-export class ImovirtualScrapeInteractor {
-    public constructor(private crawlerService: CrawlerService) { }
-    public async call(urls: string[]): Promise<any> {
-        return Promise.all(
-            urls.map(async (url) => {
-                return await this.fetchData(url);
-            }),
-        ).then(result => result.reduce((acc, val) => acc.concat(val), []));
+export class ImovirtualScrapeInteractor extends ScraperBase {
+    public constructor(crawlerService: CrawlerService) {
+        super(crawlerService);
     }
 
-    private async fetchData(url: string) {
-        if (url == null || url === '') {
-            return [];
-        }
-        const res = await this.crawlerService.call(url)
-            .catch(error => {
-                // tslint:disable-next-line: no-console
-                console.log(`An error as occurred on scrapping page...`, error);
-                return null;
-            });
-
-        if (res) {
-            const data = this.handleResponse(res);
-            return [...await this.fetchData(data.nextPage), ...data.result];
-        } else {
-            return [];
-        }
-    }
-
-    private handleResponse(res) {
+    protected handleResponse(res) {
         const $ = res.$;
         const ads = $('.section-listing__row-content .offer-item');
         const result = [];
