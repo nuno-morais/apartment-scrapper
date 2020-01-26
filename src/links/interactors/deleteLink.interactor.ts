@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Link } from '../link.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { MongoRepository } from 'typeorm';
 import { ObjectID } from 'mongodb';
+import { MongoRepository } from 'typeorm';
+import { Link } from '../link.entity';
 
 @Injectable()
 export class DeleteLinkInteractor {

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { AmazingCrawlerService } from '../common/crawler/amazing-crawler.service';
 import * as cheerio from 'cheerio';
+import { AmazingCrawlerService } from '../common/crawler/amazing-crawler.service';
 
 @Injectable()
 export class RemaxScrapeInteractor {

@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { Apartment } from '../apartment.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { MongoRepository } from 'typeorm';
-import { GetApartmentInteractor } from './getApartment.interactor';
 import { ObjectID } from 'mongodb';
+import { MongoRepository } from 'typeorm';
+import { Apartment } from '../apartment.entity';
+import { GetApartmentInteractor } from './getApartment.interactor';
 
 @Injectable()
 export class HideApartmentInteractor {

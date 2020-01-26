@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { RemaxScrapeInteractor } from './remax.scrape.interactor';
 import { CommonModule } from '../common/common.module';
+import { RemaxScrapeInteractor } from './remax.scrape.interactor';
 
 @Module({
+    exports: [RemaxScrapeInteractor],
     imports: [CommonModule],
     providers: [RemaxScrapeInteractor],
-    exports: [RemaxScrapeInteractor],
 })
 export class RemaxModule { }

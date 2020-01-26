@@ -1,22 +1,22 @@
 import { Module } from '@nestjs/common';
-import { AuthModule } from './auth/auth.module';
-import { LinksModule } from './links/links.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Link } from './links/link.entity';
-import { ApartmentsModule } from './apartments/apartments.module';
 import 'dotenv/config';
 import { Apartment } from './apartments/apartment.entity';
+import { ApartmentsModule } from './apartments/apartments.module';
+import { AuthModule } from './auth/auth.module';
+import { Link } from './links/link.entity';
+import { LinksModule } from './links/links.module';
 
 const options = {
-  type: process.env.TYPEORM_CONNECTION as any,
-  host: process.env.TYPEORM_HOST,
-  port: process.env.TYPEORM_PORT,
   database: process.env.TYPEORM_DATABASE,
   entities: [Link, Apartment],
-  synchronize: process.env.TYPEORM_SYNCHRONIZE as unknown as boolean,
-  username: process.env.TYPEORM_USERNAME,
+  host: process.env.TYPEORM_HOST,
   password: process.env.TYPEORM_PASSWORD,
+  port: process.env.TYPEORM_PORT,
+  synchronize: process.env.TYPEORM_SYNCHRONIZE as unknown as boolean,
+  type: process.env.TYPEORM_CONNECTION as any,
   useUnifiedTopology: true,
+  username: process.env.TYPEORM_USERNAME,
 };
 @Module({
   imports: [

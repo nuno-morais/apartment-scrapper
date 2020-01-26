@@ -1,11 +1,11 @@
-import { Link } from '../../src/links/link.entity';
 import 'dotenv/config';
+import { Link } from '../../src/links/link.entity';
 
 export function parseLinks(elements: Link[]): any[] {
     return elements.map(link => (JSON.parse(JSON.stringify({
+        createdAt: link.createdAt,
         id: link.id,
         provider: link.provider,
-        createdAt: link.createdAt,
         updatedAt: link.updatedAt,
         url: link.url,
         userId: link.userId,

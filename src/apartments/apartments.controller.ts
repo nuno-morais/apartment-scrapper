@@ -1,10 +1,10 @@
-import { Controller, Get, UseGuards, Request, Post, Param, Query, Res, HttpStatus } from '@nestjs/common';
+import { Controller, Get, HttpStatus, Param, Post, Query, Request, Res, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { QueryOptions } from '../common/Queries/query-options';
 import { Apartment } from './apartment.entity';
+import { FavoriteApartmentInteractor } from './interactors/favoriteApartment.interactor';
 import { GetApartmentsInteractor } from './interactors/getApartments.interactor';
 import { HideApartmentInteractor } from './interactors/hideApartment.interactor';
-import { QueryOptions } from '../common/Queries/query-options';
-import { FavoriteApartmentInteractor } from './interactors/favoriteApartment.interactor';
 
 @Controller('apartments')
 export class ApartmentsController {
@@ -16,7 +16,7 @@ export class ApartmentsController {
 
     @UseGuards(AuthGuard('jwt'))
     @Get()
-    async getApartments(@Request() req, @Res() res, @Query() query: QueryOptions): Promise<Apartment[]> {
+    public async getApartments(@Request() req, @Res() res, @Query() query: QueryOptions): Promise<Apartment[]> {
         const result = await this.getApartmentsInteractor.call(req.user.userId, false, query);
         res.set({ 'X-Total-Count': result[1] });
         res.status(HttpStatus.OK).send(result[0]);
@@ -25,13 +25,13 @@ export class ApartmentsController {
 
     @UseGuards(AuthGuard('jwt'))
     @Post(':id/actions/hide')
-    async hideApartments(@Request() req, @Param('id') id): Promise<Apartment> {
+    public async hideApartments(@Request() req, @Param('id') id): Promise<Apartment> {
         return await this.hideApartmentInteractor.call(id, req.user.userId);
     }
 
     @UseGuards(AuthGuard('jwt'))
     @Post(':id/actions/favorite')
-    async favoriteApartments(@Request() req, @Param('id') id): Promise<Apartment> {
+    public async favoriteApartments(@Request() req, @Param('id') id): Promise<Apartment> {
         return await this.favoriteApartmentInteractor.call(id, req.user.userId);
     }
 }

@@ -1,7 +1,7 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { Apartment } from '../apartment.entity';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MongoRepository } from 'typeorm';
+import { Apartment } from '../apartment.entity';
 import { QueryOptions } from './../../common/Queries/query-options';
 
 @Injectable()

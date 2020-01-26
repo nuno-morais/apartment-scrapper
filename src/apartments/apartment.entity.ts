@@ -1,4 +1,4 @@
-import { Column, Entity, ObjectID, CreateDateColumn, UpdateDateColumn, ObjectIdColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, ObjectID, ObjectIdColumn, UpdateDateColumn } from 'typeorm';
 import { ApartmentMetadata } from './apartment-metada';
 
 @Entity()

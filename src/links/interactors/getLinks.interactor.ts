@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Link } from '../link.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Link } from '../link.entity';
 import { QueryOptions } from './../../common/Queries/query-options';
 
 @Injectable()

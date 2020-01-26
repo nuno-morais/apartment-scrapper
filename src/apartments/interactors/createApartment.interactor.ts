@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Apartment } from '../apartment.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MongoRepository } from 'typeorm';
+import { Apartment } from '../apartment.entity';
 
 @Injectable()
 export class CreateApartmentInteractor {

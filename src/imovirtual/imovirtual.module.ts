@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { ImovirtualScrapeInteractor } from './imovirtual.scrape.interactor';
 import { CommonModule } from '../common/common.module';
+import { ImovirtualScrapeInteractor } from './imovirtual.scrape.interactor';
 
 @Module({
+    exports: [ImovirtualScrapeInteractor],
     imports: [CommonModule],
     providers: [ImovirtualScrapeInteractor],
-    exports: [ImovirtualScrapeInteractor],
 })
 export class ImovirtualModule { }

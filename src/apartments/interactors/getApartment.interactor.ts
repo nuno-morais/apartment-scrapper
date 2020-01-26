@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Apartment } from '../apartment.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { ObjectID } from 'mongodb';
+import { Repository } from 'typeorm';
+import { Apartment } from '../apartment.entity';
 
 @Injectable()
 export class GetApartmentInteractor {

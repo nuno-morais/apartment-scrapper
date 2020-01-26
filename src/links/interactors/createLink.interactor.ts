@@ -1,8 +1,8 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
-import { Link } from '../link.entity';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import * as parseDomain from 'parse-domain';
+import { Repository } from 'typeorm';
+import { Link } from '../link.entity';
 
 @Injectable()
 export class CreateLinkInteractor {

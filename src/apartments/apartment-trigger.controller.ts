@@ -1,4 +1,4 @@
-import { Controller, Post, UseGuards, Request } from '@nestjs/common';
+import { Controller, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { TriggerScrapersInteractor } from './interactors/triggerScrapers.interactor';
 
@@ -10,7 +10,7 @@ export class ApartmentTriggerController {
 
     @UseGuards(AuthGuard('jwt'))
     @Post()
-    async getApartments(@Request() req): Promise<void> {
+    public async getApartments(@Request() req): Promise<void> {
         this.triggerScrapersInteractor.call(req.user.userId);
         return null;
     }

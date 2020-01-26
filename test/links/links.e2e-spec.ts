@@ -1,11 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import * as request from 'supertest';
-import { AppModule } from '../../src/app.module';
-import { getToken } from '../auth0_authentication';
-import { Link } from '../../src/links/link.entity';
-import { Repository } from 'typeorm';
-import { createLink, parseLinks } from './links.utils';
 import { ObjectID } from 'mongodb';
+import * as request from 'supertest';
+import { Repository } from 'typeorm';
+import { AppModule } from '../../src/app.module';
+import { Link } from '../../src/links/link.entity';
+import { getToken } from '../auth0_authentication';
+import { createLink, parseLinks } from './links.utils';
 
 describe('LinksController (e2e)', () => {
     let app;
@@ -90,9 +90,9 @@ describe('LinksController (e2e)', () => {
                     })
                     .expect(400)
                     .expect({
-                        statusCode: 400,
                         error: 'Bad Request',
                         message: 'Provided url is not supported',
+                        statusCode: 400,
                     });
             });
         });

@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { Apartment } from '../apartment.entity';
+import { ImovirtualScrapeInteractor } from '../../imovirtual/imovirtual.scrape.interactor';
 import { GetLinksInteractor } from '../../links/interactors/getLinks.interactor';
 import { OlxScrapeInteractor } from '../../olx/olx.scrape.interactor';
 import { RemaxScrapeInteractor } from '../../remax/remax.scrape.interactor';
-import { ImovirtualScrapeInteractor } from '../../imovirtual/imovirtual.scrape.interactor';
-import { GetApartmentsInteractor } from './getApartments.interactor';
 import { ApartmentMetadata } from '../apartment-metada';
+import { Apartment } from '../apartment.entity';
 import { CreateApartmentInteractor } from './createApartment.interactor';
+import { GetApartmentsInteractor } from './getApartments.interactor';
 
 @Injectable()
 export class TriggerScrapersInteractor {

@@ -4,6 +4,12 @@ import { CrawlerService } from '../common/crawler/crawler.service';
 
 @Injectable()
 export class OlxScrapeInteractor {
+    private months = {
+        // tslint:disable-next-line: object-literal-sort-keys
+        Jan: 0, Fev: 1, Mar: 2, Abr: 3, Mai: 4, Jun: 5,
+        Jul: 6, Ago: 7, Set: 8, Out: 9, Nov: 10, Dez: 11,
+    };
+
     public constructor(private crawlerService: CrawlerService) { }
     public async call(urls: string[]): Promise<any> {
         return Promise.all(
@@ -51,21 +57,6 @@ export class OlxScrapeInteractor {
         const nextPage = $('.pageNextPrev').last().attr('href');
         return { result, nextPage };
     }
-
-    private months = {
-        Jan: 0,
-        Fev: 1,
-        Mar: 2,
-        Abr: 3,
-        Mai: 4,
-        Jun: 5,
-        Jul: 6,
-        Ago: 7,
-        Set: 8,
-        Out: 9,
-        Nov: 10,
-        Dez: 11,
-    };
     private parseDate(timeString: string): Date {
         if (timeString.startsWith('hoje')) {
             return new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());

@@ -1,6 +1,17 @@
 import { Expose, Type } from 'class-transformer';
 
 export class QueryOptions {
+    public static fromQueryOptions(options: QueryOptions): QueryOptions {
+        const qo = new QueryOptions();
+        if (options != null) {
+            qo.end = options.end;
+            qo.order = options.order;
+            qo.sort = options.sort;
+            qo.start = options.start;
+        }
+        return qo;
+    }
+
     @Type(() => Number)
     @Expose({ name: '_end' })
     public end: number;
@@ -14,17 +25,6 @@ export class QueryOptions {
     @Type(() => Number)
     @Expose({ name: '_start' })
     public start: number;
-
-    public static fromQueryOptions(options: QueryOptions): QueryOptions {
-        const qo = new QueryOptions();
-        if (options != null) {
-            qo.end = options.end;
-            qo.order = options.order;
-            qo.sort = options.sort;
-            qo.start = options.start;
-        }
-        return qo;
-    }
 
     public toMongoQuery() {
         const condition: { skip, take, order } = { skip: undefined, take: undefined, order: undefined };
