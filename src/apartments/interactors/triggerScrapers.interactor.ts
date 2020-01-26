@@ -10,9 +10,12 @@ import { GetApartmentsInteractor } from './getApartments.interactor';
 
 @Injectable()
 export class TriggerScrapersInteractor {
-    private readonly REMAX = 'REMAX';
-    private readonly OLX = 'OLX';
-    private readonly IMOVIRTUAL = 'IMOVIRTUAL';
+
+    private readonly scrapers = {
+        REMAX: null,
+        OLX: null,
+        IMOVIRTUAL: null,
+    };
 
     constructor(
         private readonly createApartmentInteractor: CreateApartmentInteractor,
@@ -21,7 +24,11 @@ export class TriggerScrapersInteractor {
         private readonly olxScrapeInteractor: OlxScrapeInteractor,
         private readonly remaxScrapeInteractor: RemaxScrapeInteractor,
         private readonly imovirtualScrapeInteractor: ImovirtualScrapeInteractor,
-    ) { }
+    ) {
+        this.scrapers.REMAX = this.remaxScrapeInteractor;
+        this.scrapers.OLX = this.olxScrapeInteractor;
+        this.scrapers.IMOVIRTUAL = this.imovirtualScrapeInteractor;
+    }
 
     public async call(userId: string): Promise<void> {
         setTimeout(async () => {
@@ -34,19 +41,16 @@ export class TriggerScrapersInteractor {
     }
 
     private async scrapeLink(link): Promise<ApartmentMetadata[]> {
-        if (link.provider === this.REMAX) {
-            return await this.remaxScrapeInteractor.call([link.url])
-                .then(result => result.map(r => (new ApartmentMetadata({ ...r, provider: this.REMAX }))))
-                .catch(error => this.handleError(error, link, this.REMAX));
-        } else if (link.provider === this.OLX) {
-            return await this.olxScrapeInteractor.call([link.url])
-                .then(result => result.map(r => (new ApartmentMetadata({ ...r, provider: this.OLX }))))
-                .catch(error => this.handleError(error, link, this.OLX));
-        } else if (link.provider === this.IMOVIRTUAL) {
-            return await this.imovirtualScrapeInteractor.call([link.url])
-                .then(result => result.map(r => (new ApartmentMetadata({ ...r, provider: this.IMOVIRTUAL }))))
-                .catch(error => this.handleError(error, link, this.IMOVIRTUAL));
+        const provider = (link.provider as string).toUpperCase();
+        const scraper = this.scrapers[provider];
+
+        if (scraper != null) {
+            console.log(provider);
+            return await scraper.call([link.url])
+                .then(result => result.map(r => (new ApartmentMetadata({ ...r, provider }))))
+                .catch(error => this.handleError(error, link, provider));
         } else {
+            console.log("not found")
             return [];
         }
     }
