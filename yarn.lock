@@ -546,12 +546,13 @@
     express "4.17.1"
     multer "1.4.2"
 
-"@nestjs/testing@^6.0.0":
-  version "6.10.14"
-  resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-6.10.14.tgz#f78b92821a35fc1f3acd96e734994856bb15a185"
-  integrity sha512-jKzT9eAIJ6xeYXd/Jxtr7lgcixqq6ArNFnzhlM7FeHe/24wFBfWLfTCHe1GJoUo381Y5tPYw3pDr4yELp/Vo9Q==
+"@nestjs/testing@^6.11.4":
+  version "6.11.4"
+  resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-6.11.4.tgz#4442c13416a75c2612505b7727a983afb8ba5751"
+  integrity sha512-RxjRmA/73YE5DJMtoKT4o2xKLRnq2diO2ICdDa/ubODAJsGhTk1BZ0JTyfbSbZmtrmzUChOZ5Qtj+Y9Li7Dz1Q==
   dependencies:
     optional "0.1.4"
+    tslib "1.10.0"
 
 "@nestjs/typeorm@^6.2.0":
   version "6.2.0"
@@ -7740,7 +7741,7 @@ tsconfig-paths@3.9.0:
     minimist "^1.2.0"
     strip-bom "^3.0.0"
 
-tslib@^1.10.0, tslib@^1.8.1, tslib@^1.9.0:
+tslib@1.10.0, tslib@^1.10.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
   integrity sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==
