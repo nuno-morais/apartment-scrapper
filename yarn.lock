@@ -4974,10 +4974,10 @@ jwa@^1.4.1:
     ecdsa-sig-formatter "1.0.11"
     safe-buffer "^5.0.1"
 
-jwks-rsa@^1.6.1:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/jwks-rsa/-/jwks-rsa-1.6.1.tgz#235804e575603673160da892940d7c7ba140c38e"
-  integrity sha512-vjc9ZamSrXoAakssNC9pQdKSE2bbi+Sg3bJaOtBT8wZ9HWSGu+UgFxgvTjOq9+yXDSYtMyt1OAyYY+lYNdOgTQ==
+jwks-rsa@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/jwks-rsa/-/jwks-rsa-1.7.0.tgz#5f3362bb428d72a5f40719b5e10785fa094d1a01"
+  integrity sha512-tq7DVJt9J6wTvl9+AQfwZIiPSuY2Vf0F+MovfRTFuBqLB1xgDVhegD33ChEAQ6yBv9zFvUIyj4aiwrSA5VehUw==
   dependencies:
     "@types/express-jwt" "0.0.42"
     debug "^4.1.0"
