@@ -1276,6 +1276,13 @@ axios@0.19.0:
     follow-redirects "1.5.10"
     is-buffer "^2.0.2"
 
+axios@^0.19.2:
+  version "0.19.2"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
+  integrity sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==
+  dependencies:
+    follow-redirects "1.5.10"
+
 babel-jest@^24.9.0:
   version "24.9.0"
   resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-24.9.0.tgz#3fc327cb8467b89d14d7bc70e315104a783ccd54"
@@ -4974,18 +4981,18 @@ jwa@^1.4.1:
     ecdsa-sig-formatter "1.0.11"
     safe-buffer "^5.0.1"
 
-jwks-rsa@^1.6.1:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/jwks-rsa/-/jwks-rsa-1.6.1.tgz#235804e575603673160da892940d7c7ba140c38e"
-  integrity sha512-vjc9ZamSrXoAakssNC9pQdKSE2bbi+Sg3bJaOtBT8wZ9HWSGu+UgFxgvTjOq9+yXDSYtMyt1OAyYY+lYNdOgTQ==
+jwks-rsa@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/jwks-rsa/-/jwks-rsa-1.9.0.tgz#efa0cd550c13b70397e27cd8764bd53c45a1ad91"
+  integrity sha512-UPCfQQg0s2kF2Ju6UFJrQH73f7MaVN/hKBnYBYOp+X9KN4y6TLChhLtaXS5nRKbZqshwVdrZ9OY63m/Q9CLqcg==
   dependencies:
     "@types/express-jwt" "0.0.42"
+    axios "^0.19.2"
     debug "^4.1.0"
     jsonwebtoken "^8.5.1"
-    limiter "^1.1.4"
-    lru-memoizer "^2.0.1"
+    limiter "^1.1.5"
+    lru-memoizer "^2.1.2"
     ms "^2.1.2"
-    request "^2.88.0"
 
 jws@^3.2.2:
   version "3.2.2"
@@ -5063,7 +5070,7 @@ levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-limiter@^1.1.4:
+limiter@^1.1.5:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/limiter/-/limiter-1.1.5.tgz#8f92a25b3b16c6131293a0cc834b4a838a2aa7c2"
   integrity sha512-FWWMIEOxz3GwUI4Ts/IvgVy6LPvoMPgjMdQ185nN6psJyBJ4yOpzqm695/h5umdLJg2vW3GR5iG11MAkR2AzJA==
@@ -5264,10 +5271,10 @@ lru-cache@~4.0.0:
     pseudomap "^1.0.1"
     yallist "^2.0.0"
 
-lru-memoizer@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/lru-memoizer/-/lru-memoizer-2.0.1.tgz#f21e015bb6856483f574070be11ca16b0c010693"
-  integrity sha512-kGl+zlIqdQL24f0Q9IUSUZeSvA7nqXPFLA7suFh00v4KVqfXkZJtkPfTfXV/oQMSPfNr6VT4xGkRAUPhFnGyxQ==
+lru-memoizer@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/lru-memoizer/-/lru-memoizer-2.1.2.tgz#5c6b43659c78ad0e9e65bf81a9e5ef1ee109a2dd"
+  integrity sha512-N5L5xlnVcbIinNn/TJ17vHBZwBMt9t7aJDz2n97moWubjNl6VO9Ao2XuAGBBddkYdjrwR9HfzXbT6NfMZXAZ/A==
   dependencies:
     lodash.clonedeep "^4.5.0"
     lru-cache "~4.0.0"
