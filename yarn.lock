@@ -569,6 +569,11 @@
     consola "^2.3.0"
     node-fetch "^2.3.0"
 
+"@panva/asn1.js@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@panva/asn1.js/-/asn1.js-1.0.0.tgz#dd55ae7b8129e02049f009408b97c61ccf9032f6"
+  integrity sha512-UdkG3mLEqXgnlKsWanWcgb6dOjUzJ+XC5f+aWw30qrtjxeNUSfKX1cd5FBzOaXQumoe9nIqeZUvrRJS03HCCtw==
+
 "@sindresorhus/is@^0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
@@ -4813,6 +4818,13 @@ jest@^25.1.0:
     import-local "^3.0.2"
     jest-cli "^25.1.0"
 
+jose@^2.0.2:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/jose/-/jose-2.0.4.tgz#7838354d28f64466db9fc7f275aa8a96db656f37"
+  integrity sha512-EArN9f6aq1LT/fIGGsfghOnNXn4noD+3dG5lL/ljY3LcRjw1u9w+4ahu/4ahsN6N0kRLyyW6zqdoYk7LNx3+YQ==
+  dependencies:
+    "@panva/asn1.js" "^1.0.0"
+
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
@@ -4939,7 +4951,7 @@ json5@^1.0.1:
   dependencies:
     minimist "^1.2.0"
 
-jsonwebtoken@^8.2.0, jsonwebtoken@^8.5.1:
+jsonwebtoken@^8.2.0:
   version "8.5.1"
   resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-8.5.1.tgz#00e71e0b8df54c2121a1f26137df2280673bcc0d"
   integrity sha512-XjwVfRS6jTMsqYs0EsuJ4LGxXV14zQybNd4L2r0UvbVnSF9Af8x7p5MzbJ90Ioz/9TI41/hTCvznF/loiSzn8w==
@@ -4974,18 +4986,16 @@ jwa@^1.4.1:
     ecdsa-sig-formatter "1.0.11"
     safe-buffer "^5.0.1"
 
-jwks-rsa@^1.6.1:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/jwks-rsa/-/jwks-rsa-1.6.1.tgz#235804e575603673160da892940d7c7ba140c38e"
-  integrity sha512-vjc9ZamSrXoAakssNC9pQdKSE2bbi+Sg3bJaOtBT8wZ9HWSGu+UgFxgvTjOq9+yXDSYtMyt1OAyYY+lYNdOgTQ==
+jwks-rsa@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/jwks-rsa/-/jwks-rsa-2.0.1.tgz#f00407fe77396db6c6fd0942d60df698a909934a"
+  integrity sha512-ueT2sQm6eB9D0N3GTE9GU7Mt8UsMWDsNSpEFfqE/NxT+euRDHhaJHql5AddieiHNzSqZxeDREK1yHb8IiwrGGw==
   dependencies:
     "@types/express-jwt" "0.0.42"
     debug "^4.1.0"
-    jsonwebtoken "^8.5.1"
-    limiter "^1.1.4"
-    lru-memoizer "^2.0.1"
-    ms "^2.1.2"
-    request "^2.88.0"
+    jose "^2.0.2"
+    limiter "^1.1.5"
+    lru-memoizer "^2.1.2"
 
 jws@^3.2.2:
   version "3.2.2"
@@ -5063,7 +5073,7 @@ levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-limiter@^1.1.4:
+limiter@^1.1.5:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/limiter/-/limiter-1.1.5.tgz#8f92a25b3b16c6131293a0cc834b4a838a2aa7c2"
   integrity sha512-FWWMIEOxz3GwUI4Ts/IvgVy6LPvoMPgjMdQ185nN6psJyBJ4yOpzqm695/h5umdLJg2vW3GR5iG11MAkR2AzJA==
@@ -5264,10 +5274,10 @@ lru-cache@~4.0.0:
     pseudomap "^1.0.1"
     yallist "^2.0.0"
 
-lru-memoizer@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/lru-memoizer/-/lru-memoizer-2.0.1.tgz#f21e015bb6856483f574070be11ca16b0c010693"
-  integrity sha512-kGl+zlIqdQL24f0Q9IUSUZeSvA7nqXPFLA7suFh00v4KVqfXkZJtkPfTfXV/oQMSPfNr6VT4xGkRAUPhFnGyxQ==
+lru-memoizer@^2.1.2:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/lru-memoizer/-/lru-memoizer-2.1.4.tgz#b864d92b557f00b1eeb322156a0409cb06dafac6"
+  integrity sha512-IXAq50s4qwrOBrXJklY+KhgZF+5y98PDaNo0gi/v2KQBFLyWr+JyFvijZXkGKjQj/h9c0OwoE+JZbwUXce76hQ==
   dependencies:
     lodash.clonedeep "^4.5.0"
     lru-cache "~4.0.0"
@@ -5596,7 +5606,7 @@ ms@2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
   integrity sha512-tgp+dl5cGk28utYktBsrFqA7HKgrhgPsg6Z/EfhWI4gl1Hwq8B/GmY/0oXZ6nF8hDVesS/FpnYaD/kOWhYQvyg==
 
-ms@^2.1.1, ms@^2.1.2:
+ms@^2.1.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
