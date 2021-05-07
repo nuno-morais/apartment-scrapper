@@ -49,7 +49,7 @@
     "request": "^2.88.0",
     "rimraf": "^3.0.0",
     "rxjs": "^6.3.3",
-    "typeorm": "^0.2.22",
+    "typeorm": "^0.2.25",
     "webpack": "^4.41.5",
     "webpack-node-externals": "^1.7.2"
   },
